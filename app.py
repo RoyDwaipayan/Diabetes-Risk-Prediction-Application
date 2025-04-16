@@ -13,23 +13,10 @@ with open('features.json', 'r') as file:
 # Load trained model and preprocessing tools
 print("Load trained model and preprocessing tools...")
 
-# Replace with your actual file ID
-MODEL_FILE_ID = "1ehTsbtzeYVe0vslo3WSDhayj8HgWRDfb"
-MODEL_LOCAL_PATH = "rf_model.pkl"
-
-# Download only if not already present
-if not os.path.exists(MODEL_LOCAL_PATH):
-    utills.download_from_gdrive(MODEL_FILE_ID, MODEL_LOCAL_PATH)
-
-# Load the model
-model = joblib.load(MODEL_LOCAL_PATH)
-
-# model = utills.download_model(MODEL_URL)
-# model = joblib.load("rf_model.pkl")
+model = joblib.load("rf_model.pkl")
 scaler = joblib.load("scaler.pkl")
 feature_names = joblib.load("feature_names.pkl")
 model_details = joblib.load("model_details.pkl")
-
 
 print("Initializing Streamlit UI...")
 # ----------------- Streamlit UI -----------------------
