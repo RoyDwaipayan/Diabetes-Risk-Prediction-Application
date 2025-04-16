@@ -3,19 +3,11 @@ import pandas as pd
 import numpy as np
 import joblib
 import base64
-import urllib.request
-import requests
-import os
 
 def get_image_base64(file_path):
         with open(file_path, "rb") as f:
             data = f.read()
         return base64.b64encode(data).decode()
-
-def download_model(url, filename="rf_model.pkl"):
-    if not os.path.exists(filename):
-        urllib.request.urlretrieve(url, filename)
-    return joblib.load(filename)
 
 def streamlit_layout():
     st.set_page_config(
@@ -141,26 +133,3 @@ def apply_boxcox(x, lmbda):
     else:
         return ((x + 0.001) ** lmbda - 1) / lmbda
     
-
-def download_from_gdrive(file_id, destination):
-    URL = "https://drive.google.com/uc?export=download"
-    session = requests.Session()
-
-    response = session.get(URL, params={'id': file_id}, stream=True)
-
-    # Handle confirmation for large files
-    def get_confirm_token(response):
-        for key, value in response.cookies.items():
-            if key.startswith('download_warning'):
-                return value
-        return None
-
-    token = get_confirm_token(response)
-
-    if token:
-        response = session.get(URL, params={'id': file_id, 'confirm': token}, stream=True)
-
-    with open(destination, "wb") as f:
-        for chunk in response.iter_content(32768):
-            if chunk:
-                f.write(chunk)
