@@ -12,7 +12,7 @@ with open('features.json', 'r') as file:
 # Load trained model and preprocessing tools
 print("Load trained model and preprocessing tools...")
 
-MODEL_URL = "https://drive.google.com/file/d/1UuLDppG2_DjRpoHAepEp9SRkK2rv6dfi/view?usp=sharing/rf_model.pkl"
+MODEL_URL = "https://drive.google.com/file/d/1UuLDppG2_DjRpoHAepEp9SRkK2rv6dfi/view?usp=sharing"
 
 model = utills.download_model(MODEL_URL)
 scaler = joblib.load("scaler.pkl")
