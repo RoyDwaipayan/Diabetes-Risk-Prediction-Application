@@ -5,6 +5,7 @@ from openai import OpenAI
 import json
 import utills
 import joblib
+import os
 
 with open('features.json', 'r') as file:
     col_map = json.load(file)
@@ -12,9 +13,19 @@ with open('features.json', 'r') as file:
 # Load trained model and preprocessing tools
 print("Load trained model and preprocessing tools...")
 
-MODEL_URL = "https://drive.google.com/file/d/1UuLDppG2_DjRpoHAepEp9SRkK2rv6dfi/view?usp=sharing"
+# Replace with your actual file ID
+MODEL_FILE_ID = "1ehTsbtzeYVe0vslo3WSDhayj8HgWRDfb"
+MODEL_LOCAL_PATH = "rf_model.pkl"
 
-model = utills.download_model(MODEL_URL)
+# Download only if not already present
+if not os.path.exists(MODEL_LOCAL_PATH):
+    utills.download_from_gdrive(MODEL_FILE_ID, MODEL_LOCAL_PATH)
+
+# Load the model
+model = joblib.load(MODEL_LOCAL_PATH)
+
+# model = utills.download_model(MODEL_URL)
+# model = joblib.load("rf_model.pkl")
 scaler = joblib.load("scaler.pkl")
 feature_names = joblib.load("feature_names.pkl")
 model_details = joblib.load("model_details.pkl")
@@ -35,18 +46,18 @@ with tab1:
     col_list = [col1, col2, col3]
     user_input = utills.get_user_input(feature_names, col_map, col_list)
 
-    with col2:
-        if st.button("🔍 Predict Diabetes Risk"):
-            input_df = user_input
-            input_scaled = scaler.transform(input_df)
-            prediction = model.predict(input_scaled)[0]
-            prob = model.predict_proba(input_scaled)[0][1]
+    if st.button("🔍 Predict Diabetes Risk"):
+        with col2:
+                input_df = user_input
+                input_scaled = scaler.transform(input_df)
+                prediction = model.predict(input_scaled)[0]
+                prob = model.predict_proba(input_scaled)[0][1]
 
-            st.session_state["prediction"] = prediction
-            st.session_state["prob"] = prob
-            st.session_state["input"] = user_input.to_dict()
-    st.markdown(f"User Input: ")
-    st.table(user_input)
+                st.session_state["prediction"] = prediction
+                st.session_state["prob"] = prob
+                st.session_state["input"] = user_input.to_dict()
+        st.markdown(f"User Input: ")
+        st.table(user_input)
 
 with tab2:
     if "prediction" in st.session_state:
