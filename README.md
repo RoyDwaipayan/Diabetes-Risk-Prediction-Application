@@ -1,6 +1,8 @@
 # Diabetes-Risk-Prediction-Application
 Diabetes Risk Prediction Application with openai integration
 
+https://diabetes-risk-prediction-application-hi3hkimtfqxcxj3dx554je.streamlit.app/
+
 # Steps for running on your local:
 1. Download the repsitory on your local
 2. Install the libraries under requirements.txt
