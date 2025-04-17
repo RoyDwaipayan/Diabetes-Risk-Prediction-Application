@@ -6,3 +6,4 @@ requests
 openai
 Pillow
 scipy
+gdown
