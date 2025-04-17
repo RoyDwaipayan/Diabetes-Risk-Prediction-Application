@@ -13,7 +13,9 @@ with open('features.json', 'r') as file:
 # Load trained model and preprocessing tools
 print("Load trained model and preprocessing tools...")
 
-model = joblib.load("rf_model.pkl")
+model = download.download_model()
+
+# model = joblib.load("rf_model.pkl")
 scaler = joblib.load("scaler.pkl")
 feature_names = joblib.load("feature_names.pkl")
 model_details = joblib.load("model_details.pkl")
