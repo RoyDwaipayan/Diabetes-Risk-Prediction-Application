@@ -4,6 +4,7 @@ import numpy as np
 from openai import OpenAI
 import json
 import utills, download
+from huggingface_hub import hf_hub_download
 import joblib
 import os
 
@@ -13,8 +14,11 @@ with open('features.json', 'r') as file:
 # Load trained model and preprocessing tools
 print("Load trained model and preprocessing tools...")
 
-model = download.download_model()
-
+model_path = hf_hub_download(
+    repo_id="Dwaipayan08/random_forest_clinical_diabetes",
+    filename="rf_model.pkl"
+)
+model = joblib.load(model_path)
 # model = joblib.load("rf_model.pkl")
 scaler = joblib.load("scaler.pkl")
 feature_names = joblib.load("feature_names.pkl")
