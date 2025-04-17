@@ -7,3 +7,4 @@ openai
 Pillow
 scipy
 gdown
+huggingface_hub
