@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from openai import OpenAI
 import json
-import utills
+import utills, download
 import joblib
 import os
 
