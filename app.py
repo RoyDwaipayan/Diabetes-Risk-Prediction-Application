@@ -11,9 +11,12 @@ import os
 with open('features.json', 'r') as file:
     col_map = json.load(file)
 
+print("Initializing Streamlit UI...")
+utills.streamlit_layout()
+utills.css_markdown()
+
 # Load trained model and preprocessing tools
 print("Load trained model and preprocessing tools...")
-
 @st.cache_resource
 def load_model():
     model_path = hf_hub_download(
@@ -28,11 +31,7 @@ scaler = joblib.load("scaler.pkl")
 feature_names = joblib.load("feature_names.pkl")
 model_details = joblib.load("model_details.pkl")
 
-print("Initializing Streamlit UI...")
 # ----------------- Streamlit UI -----------------------
-utills.streamlit_layout()
-utills.css_markdown()
-
 
 tab1, tab2, tab3 = st.tabs(["📝 Input Form", "📊 Results", "Model Specifiations"])
 with tab1:
