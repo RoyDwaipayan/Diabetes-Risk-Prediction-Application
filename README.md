@@ -8,4 +8,4 @@ https://diabetes-risk-prediction-application-hi3hkimtfqxcxj3dx554je.streamlit.ap
 2. Install the libraries under requirements.txt
 3. Run the model.py file to generate the model's .pkl file
 4. Comment out line 20-28 in app.py and uncomment like 29
-5. Run from command prompt using "streamlit run app.py"
+5. Run from command prompt using the command "streamlit run app.py"
