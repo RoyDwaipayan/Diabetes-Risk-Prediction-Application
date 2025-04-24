@@ -97,7 +97,7 @@ with tab2:
 with tab3:
     st.subheader("Below are the specifications of the backend model")
     st.markdown(f"""
-                Model Used: {model_details["Model"]} \n
-                Accuracy of the model: {model_details["Accuracy"]} \n
-                Recall score of the model: {model_details["Recall"]} \n
-                Cohen Kappa Value of the model: {model_details["Cohen Kappa Score"]} \n """)
+                Model Used: LightGBM \n
+                Accuracy of the model: 71.6% \n
+                Recall score of the model: 76.5% \n
+                F1 Score: 45.2% \n """)
