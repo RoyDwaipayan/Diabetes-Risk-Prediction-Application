@@ -33,7 +33,7 @@ model_details = joblib.load("model_details.pkl")
 
 # ----------------- Streamlit UI -----------------------
 
-tab1, tab2, tab3 = st.tabs(["📝 Input Form", "📊 Results", "Model Specifiations"])
+tab1, tab2, tab3 = st.tabs(["📝 Input Form", "📊 Results", "Model Specifications"])
 with tab1:
     st.subheader("Fill Patient Information")
     user_input = pd.DataFrame(columns=feature_names)
