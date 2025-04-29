@@ -97,7 +97,7 @@ with tab2:
 with tab3:
     st.subheader("Below are the specifications of the backend model")
     st.markdown(f"""
-                Model Used: LightGBM \n
-                Accuracy of the model: 71.6% \n
-                Recall score of the model: 76.5% \n
-                F1 Score: 45.2% \n """)
+                Model Used: Random Forest \n
+                Accuracy of the model: 85.6% \n
+                Recall score of the model: 89.5% \n
+                F1 Score: 68.2% \n """)
