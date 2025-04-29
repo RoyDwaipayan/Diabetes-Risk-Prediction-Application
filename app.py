@@ -5,27 +5,38 @@ from openai import OpenAI
 import json
 import utills
 import joblib
+from huggingface_hub import hf_hub_download
+import os
 
 with open('features.json', 'r') as file:
     col_map = json.load(file)
 
+print("Initializing Streamlit UI...")
+utills.streamlit_layout()
+utills.css_markdown()
+
 # Load trained model and preprocessing tools
 print("Load trained model and preprocessing tools...")
+@st.cache_resource
+def load_model():
+    model_path = hf_hub_download(
+        repo_id="Dwaipayan08/random_forest_clinical_diabetes",
+        filename="rf_model.pkl"
+    )
+    return joblib.load(model_path)
 
-MODEL_URL = "https://drive.google.com/file/d/1UuLDppG2_DjRpoHAepEp9SRkK2rv6dfi/view?usp=sharing/rf_model.pkl"
-
-model = utills.download_model(MODEL_URL)
+model = load_model()
+# model = joblib.load("rf_model.pkl")
 scaler = joblib.load("scaler.pkl")
 feature_names = joblib.load("feature_names.pkl")
 model_details = joblib.load("model_details.pkl")
 
-
-print("Initializing Streamlit UI...")
 # ----------------- Streamlit UI -----------------------
-utills.streamlit_layout()
-utills.css_markdown()
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4564f6eae32015a86221b763d8e257043665e5cb
 tab1, tab2, tab3 = st.tabs(["📝 Input Form", "📊 Results", "Model Specifications"])
 with tab1:
     st.subheader("Fill Patient Information")
@@ -35,18 +46,18 @@ with tab1:
     col_list = [col1, col2, col3]
     user_input = utills.get_user_input(feature_names, col_map, col_list)
 
-    with col2:
-        if st.button("🔍 Predict Diabetes Risk"):
-            input_df = user_input
-            input_scaled = scaler.transform(input_df)
-            prediction = model.predict(input_scaled)[0]
-            prob = model.predict_proba(input_scaled)[0][1]
+    if st.button("🔍 Predict Diabetes Risk"):
+        with col2:
+                input_df = user_input
+                input_scaled = scaler.transform(input_df)
+                prediction = model.predict(input_scaled)[0]
+                prob = model.predict_proba(input_scaled)[0][1]
 
-            st.session_state["prediction"] = prediction
-            st.session_state["prob"] = prob
-            st.session_state["input"] = user_input.to_dict()
-    st.markdown(f"User Input: ")
-    st.table(user_input)
+                st.session_state["prediction"] = prediction
+                st.session_state["prob"] = prob
+                st.session_state["input"] = user_input.to_dict()
+        st.markdown(f"User Input: ")
+        st.table(user_input)
 
 with tab2:
     if "prediction" in st.session_state:
@@ -90,7 +101,14 @@ with tab2:
 with tab3:
     st.subheader("Below are the specifications of the backend model")
     st.markdown(f"""
+<<<<<<< HEAD
                 Model Used: LightGBM \n
                 Accuracy of the model: 71.6% \n
                 Recall score of the model: 76.5% \n
                 F1 Score: 45.2% \n """)
+=======
+                Model Used: Random Forest \n
+                Accuracy of the model: 85.6% \n
+                Recall score of the model: 89.5% \n
+                F1 Score: 68.2% \n """)
+>>>>>>> 4564f6eae32015a86221b763d8e257043665e5cb

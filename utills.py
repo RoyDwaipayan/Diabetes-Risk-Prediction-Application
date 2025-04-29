@@ -3,18 +3,11 @@ import pandas as pd
 import numpy as np
 import joblib
 import base64
-import urllib.request
-import os
 
 def get_image_base64(file_path):
         with open(file_path, "rb") as f:
             data = f.read()
         return base64.b64encode(data).decode()
-
-def download_model(url, filename="rf_model.pkl"):
-    if not os.path.exists(filename):
-        urllib.request.urlretrieve(url, filename)
-    return joblib.load(filename)
 
 def streamlit_layout():
     st.set_page_config(
@@ -139,3 +132,4 @@ def apply_boxcox(x, lmbda):
         return np.log(x + 0.001)
     else:
         return ((x + 0.001) ** lmbda - 1) / lmbda
+    

@@ -5,4 +5,9 @@ joblib
 requests
 openai
 Pillow
+<<<<<<< HEAD
 scipy
+=======
+scipy
+huggingface_hub
+>>>>>>> 4564f6eae32015a86221b763d8e257043665e5cb
