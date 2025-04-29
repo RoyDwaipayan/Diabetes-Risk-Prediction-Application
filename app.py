@@ -33,10 +33,6 @@ model_details = joblib.load("model_details.pkl")
 
 # ----------------- Streamlit UI -----------------------
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 4564f6eae32015a86221b763d8e257043665e5cb
 tab1, tab2, tab3 = st.tabs(["📝 Input Form", "📊 Results", "Model Specifications"])
 with tab1:
     st.subheader("Fill Patient Information")
@@ -48,14 +44,14 @@ with tab1:
 
     if st.button("🔍 Predict Diabetes Risk"):
         with col2:
-                input_df = user_input
-                input_scaled = scaler.transform(input_df)
-                prediction = model.predict(input_scaled)[0]
-                prob = model.predict_proba(input_scaled)[0][1]
+            input_df = user_input
+            input_scaled = scaler.transform(input_df)
+            prediction = model.predict(input_scaled)[0]
+            prob = model.predict_proba(input_scaled)[0][1]
 
-                st.session_state["prediction"] = prediction
-                st.session_state["prob"] = prob
-                st.session_state["input"] = user_input.to_dict()
+            st.session_state["prediction"] = prediction
+            st.session_state["prob"] = prob
+            st.session_state["input"] = user_input.to_dict()
         st.markdown(f"User Input: ")
         st.table(user_input)
 
@@ -101,14 +97,7 @@ with tab2:
 with tab3:
     st.subheader("Below are the specifications of the backend model")
     st.markdown(f"""
-<<<<<<< HEAD
-                Model Used: LightGBM \n
-                Accuracy of the model: 71.6% \n
-                Recall score of the model: 76.5% \n
-                F1 Score: 45.2% \n """)
-=======
                 Model Used: Random Forest \n
-                Accuracy of the model: 85.6% \n
+                Accuracy of the model: 86.6% \n
                 Recall score of the model: 89.5% \n
                 F1 Score: 68.2% \n """)
->>>>>>> 4564f6eae32015a86221b763d8e257043665e5cb
